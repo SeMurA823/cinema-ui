@@ -17,7 +17,7 @@ export default function TicketComponent() {
         try {
             setLoaded(false);
             const response = await $api
-                .get<IPage<TicketType>>(`/tickets/mytickets?number=${page}&size=${size}&sort=filmScreening.date,desc`);
+                .get<IPage<TicketType>>(`/tickets/mytickets?page=${page - 1}&size=${size}&sort=filmScreening.date,desc`);
             setTicketPage(response.data);
         } catch (e) {
             setError(true);
@@ -27,7 +27,7 @@ export default function TicketComponent() {
     }
 
     useEffect(() => {
-        getTickets(0, 10);
+        getTickets(1, 10);
     }, [])
 
     if (!loaded)
@@ -41,7 +41,7 @@ export default function TicketComponent() {
                 <Stack spacing={2}>
                     {ticketPage.content.map(ticket=>(<TicketItem key={ticket.id} ticket={ticket}/>))}
                 </Stack>
-                <Pagination count={ticketPage.totalPages} page={ticketPage.number} onChange={(event, page) => getTickets(page, ticketPage.size)}/>
+                <Pagination count={ticketPage.totalPages} page={ticketPage.number + 1} onChange={(event, page) => getTickets(page, ticketPage.size)}/>
             </Stack>
         </Container>
     );

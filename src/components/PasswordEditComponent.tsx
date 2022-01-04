@@ -12,7 +12,7 @@ export default function PasswordEditComponent() {
     const editPass = async () => {
         try {
             setLoaded(false);
-            await $api.post(`/users/edit?password`, JSON.stringify(password));
+            await $api.post(`/users/edit?password`, password);
             setError(false);
         } catch (e) {
             setError(true);
