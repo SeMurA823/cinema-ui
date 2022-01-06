@@ -20,11 +20,9 @@ jobs:
         run: docker login --username ${{ secrets.USERNAME_HUB }} --password ${{ secrets.PASSWORD_HUB }}
       - name: Install dependencies
         run: npm install
-      - name: Test
-        run: npm test
-        env:
-           CI: false
       - name: Generate build
+        env:
+          CI: false
         run: npm run build
       - name: Build Docker
         run: docker build --tag ${{ secrets.USERNAME_HUB }}/cinema-ui:latest .
