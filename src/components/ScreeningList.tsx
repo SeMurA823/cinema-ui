@@ -15,7 +15,7 @@ export default function ScreeningList(props: Props) {
     const [date, setDate] = useState<Moment | null>(moment(new Date()));
     return (
         <Stack paddingX={5} paddingY={3}>
-            <Stack direction='row' alignItems='center' spacing={2}>
+            <Stack direction='column' alignItems='start' justifyContent={'center'} spacing={2}>
                 <Typography variant='h4' fontWeight='bolder'>Кинопоказы</Typography>
                 <LocalizationProvider dateAdapter={AdapterMoment} locale={'ru'}>
                     <DatePicker label='Дата'

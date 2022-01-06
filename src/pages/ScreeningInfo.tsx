@@ -70,7 +70,7 @@ export default function ScreeningInfo() {
                 </Typography>
                 <Typography fontWeight={'bolder'}>{screening.hall.name}</Typography>
             </Stack>
-            <Stack alignItems={'center'} justifyContent={'center'} padding={2} style={{overflow: 'auto'}}>
+            <Stack alignItems={'center'} justifyContent={'center'} style={{overflow: 'auto'}} padding={2} sx={{alignItems: { xs: 'start', md: 'center'}}}>
                 <ScreeningSeats screeningId={Number(id)} onChange={seats => selectedSeats = seats}/>
             </Stack>
             <Stack direction={'row'} justifyContent={'center'} spacing={2}>

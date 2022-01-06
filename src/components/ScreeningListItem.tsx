@@ -75,7 +75,7 @@ export default function ScreeningListItem(props: Props) {
             {halls.map(hall => (
                 <Stack padding={2} bgcolor={'#555555'} style={{borderRadius: 10}} key={hall.id}>
                     <Typography variant='h5' fontWeight='bolder'>{hall.name}: </Typography>
-                    <Stack direction={"row"} padding={2}>
+                    <Stack direction={"row"} padding={2} flexWrap={'wrap'}>
                         {screenings.get(hall.id)?.map(screening => (
                             <Badge badgeContent={(`${screening.price}₽`)} color={'primary'} style={{margin: 10}}
                                    key={screening.id}>
