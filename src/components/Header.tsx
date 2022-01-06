@@ -2,23 +2,30 @@ import {
     AppBar,
     Avatar,
     Box,
-    Button,
-    Container,
+    Button, Container,
     IconButton,
     Link,
     Menu,
     MenuItem,
+    Stack,
     Toolbar,
     Tooltip,
     Typography
 } from "@mui/material";
-import MenuIcon from '@mui/icons-material/Menu';
 
 import * as React from "react";
 import {useContext, useEffect} from "react";
 import {Context} from "../index";
 import {LOGIN_URL, LOGOUT_URL} from "../App";
 import {observer} from "mobx-react-lite";
+import {
+    CameraIndoor,
+    MenuBookOutlined,
+    MenuOpenOutlined,
+    MenuOutlined,
+    Movie,
+    VideoFileOutlined
+} from "@mui/icons-material";
 
 type TextLink = {
     value: string,
@@ -87,30 +94,28 @@ function Header(props: Props) {
         <>
             <AppBar position={(props.position) ? props.position : 'static'}
                     color={(props.color) ? props.color : 'default'}>
-                <Container maxWidth="xl">
-                    <Toolbar disableGutters>
+                <Container>
+                    <Toolbar disableGutters style={{justifyContent: 'space-around'}}>
                         <Button variant='text' href='/'>
                             <Typography
                                 variant="h6"
                                 noWrap
                                 component="div"
-                                sx={{mr: 2, display: {xs: 'none', md: 'flex'}}}
                             >
                                 КИНOFF
                             </Typography>
                         </Button>
 
                         <Box sx={{flexGrow: 1, display: {xs: 'flex', md: 'none'}}}>
-                            <IconButton
-                                size="large"
+                            <Button
                                 aria-label="account of current user"
                                 aria-controls="menu-appbar"
                                 aria-haspopup="true"
                                 onClick={handleOpenNavMenu}
                                 color="inherit"
                             >
-                                <MenuIcon/>
-                            </IconButton>
+                                <MenuOutlined/>
+                            </Button>
                             <Menu
                                 id="menu-appbar"
                                 anchorEl={anchorElNav}
@@ -138,14 +143,14 @@ function Header(props: Props) {
                                 ))}
                             </Menu>
                         </Box>
-                        <Typography
-                            variant="h6"
-                            noWrap
-                            component="div"
-                            sx={{flexGrow: 1, display: {xs: 'flex', md: 'none'}}}
-                        >
-                            КИНOFF
-                        </Typography>
+                        {/*<Typography*/}
+                        {/*    variant="h6"*/}
+                        {/*    noWrap*/}
+                        {/*    component="div"*/}
+                        {/*    sx={{flexGrow: 1, display: {xs: 'flex', md: 'none'}}}*/}
+                        {/*>*/}
+                        {/*    КИНOFF*/}
+                        {/*</Typography>*/}
                         <Box sx={{flexGrow: 1, display: {xs: 'none', md: 'flex'}}}>
                             {pages.map((page) => (
                                 <Button

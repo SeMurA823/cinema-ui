@@ -55,14 +55,14 @@ export default function ProfileComponent() {
         return (<Skeleton style={{width: '100%', height: '420'}}/>)
 
     return (
-        <Stack spacing={2}>
+        <Stack spacing={2} >
             <Divider>Личная информация</Divider>
-            <Stack direction={'row'} flexWrap={'wrap'} spacing={2} justifyContent='center'>
-                <TextField label='Имя' value={user.firstName} id={'firstName'} onChange={handleChange}/>
-                <TextField label='Фамилия' value={user.lastName} id={'lastName'} onChange={handleChange}/>
+            <Stack alignItems={'center'} justifyContent='center' direction={'row'} flexWrap={'wrap'}>
+                <TextField label='Имя' value={user.firstName} id={'firstName'} onChange={handleChange} style={{margin: 10}}/>
+                <TextField label='Фамилия' value={user.lastName} id={'lastName'} onChange={handleChange} style={{margin: 10}}/>
             </Stack>
-            <Stack direction={'row'} flexWrap={'wrap'} spacing={2} justifyContent='center'>
-                <TextField label='Отчество' value={user.patronymic} id={'patronymic'} onChange={handleChange}/>
+            <Stack flexWrap={'wrap'} spacing={2} justifyContent='center' direction={'row'}>
+                <TextField label='Отчество' value={user.patronymic} id={'patronymic'} onChange={handleChange} style={{margin: 10}}/>
                 <LocalizationProvider dateAdapter={AdapterMoment} locale={'ru'}>
                     <DatePicker label='Дата'
                                 mask={'__.__.____'}
@@ -73,21 +73,21 @@ export default function ProfileComponent() {
                                     });
                                 }}
                                 value={moment(new Date(user.birthDate))}
-                                renderInput={(props) => <TextField {...props}/>}/>
+                                renderInput={(props) => <TextField {...props} style={{margin: 10}}/>}/>
                 </LocalizationProvider>
             </Stack>
-            <Stack direction={'row'} flexWrap={'wrap'} spacing={2} justifyContent='center'>
-                <Select value={user.gender} id='gender' defaultValue={user.gender} onChange={e => setUser({
+            <Stack sx={{mr: 2, flexDirection: {xs: 'column', md: 'row'}}} flexWrap={'wrap'} spacing={2} justifyContent='center'>
+                <Select value={user.gender?user.gender:'None'} id='gender' defaultValue={user.gender?user.gender:'None'} onChange={e => setUser({
                     ...user,
                     gender: e.target.value
                 })}>
-                    <MenuItem value={''}>Не указано</MenuItem>
+                    <MenuItem value={'None'}>Не указано</MenuItem>
                     <MenuItem value={'Male'}>Мужчина</MenuItem>
                     <MenuItem value={'Female'}>Женщина</MenuItem>
                 </Select>
             </Stack>
             <Divider>Контактная информация</Divider>
-            <Stack direction={'row'} flexWrap={'wrap'} spacing={2} justifyContent='center'>
+            <Stack sx={{mr: 0, flexDirection: {xs: 'column', md: 'row'}}} flexWrap={'wrap'} spacing={2} justifyContent='center'>
                 <TextField label='Номер телефона' value={user.tel} id={'tel'} onChange={handleChange} required
                            inputProps={{
                                inputMode: 'tel',
