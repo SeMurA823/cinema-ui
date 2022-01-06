@@ -10,7 +10,7 @@ type Props = {
 export default function PosterImage(props: Props) {
     const [loaded, setLoaded] = useState<boolean>()
     return (
-        <Stack style={{width: 450, height: 640, background: 'transparent'}} alignItems={'center'}
+        <Stack style={{width: 350, height: 600, background: 'transparent'}} alignItems={'center'}
                justifyContent={'center'}>
             <img src={`${SERVER_URL}/files/${props.poster.filename}`} alt={''}
                  style={{maxWidth: '100%', maxHeight: '100%', display: (loaded) ? 'block' : 'none', borderRadius: 10}}

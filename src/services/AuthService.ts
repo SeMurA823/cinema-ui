@@ -9,7 +9,7 @@ export default class AuthService {
             username: username,
             password: password,
             rememberMe: rememberMe
-        } as ILogin))
+        } as ILogin), {withCredentials: true})
     }
 
     static async logout(): Promise<AxiosResponse<AuthResponse>> {
