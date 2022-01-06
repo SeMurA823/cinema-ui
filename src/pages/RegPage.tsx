@@ -21,7 +21,7 @@ export default function RegPage() {
         patronymic: '',
         gender: '',
         tel: '',
-        birthDate: new Date(1970,1,1).toISOString(),
+        birthDate: new Date(1970, 1, 1).toISOString(),
     } as IUser);
     const [password, setPassword] = useState<Password>({
         password: '',
@@ -33,10 +33,10 @@ export default function RegPage() {
     const {store} = useContext(Context);
     const navigate = useNavigate();
 
-    useEffect(()=>{
+    useEffect(() => {
         if (store.isAuth)
             navigate("/");
-    },[])
+    }, [])
 
     const onSubmit = async () => {
         try {
@@ -68,6 +68,12 @@ export default function RegPage() {
             ...password,
             [prop]: value
         });
+    }
+
+    const validate = () => {
+        return user.tel !== '' && user.gender !== '' && user.birthDate !== ''
+            && user.firstName !== '' && user.lastName !== ''
+            && password.password?.length >= 6 && password.password === password.repeatPassword
     }
 
     if (!loaded)
@@ -120,7 +126,8 @@ export default function RegPage() {
                     <TextField label='Пароль' type={'password'} value={password.password} id={'password'}
                                onChange={handleChangePassword}
                                helperText={'Минимум 6 символов'}
-                               required error={password.repeatPassword !== password.password || password.password?.length < 6}/>
+                               required
+                               error={password.repeatPassword !== password.password || password.password?.length < 6}/>
                     <TextField label='Повторите пароль' type={'password'} value={password.repeatPassword}
                                id={'repeatPassword'} onChange={handleChangePassword}
                                required error={password.repeatPassword !== password.password}/>
@@ -130,9 +137,11 @@ export default function RegPage() {
                         Пользователь с данным номером телефона уже существует <Link href='/signin'>Войти?</Link>
                     </Alert>
                 }
-                <Button onClick={()=>onSubmit()}>
-                    Зарегистрироваться
-                </Button>
+                {validate() &&
+                    <Button onClick={() => onSubmit()}>
+                        Зарегистрироваться
+                    </Button>
+                }
             </Stack>
         </Container>
     )
