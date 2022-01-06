@@ -53,8 +53,6 @@ export default function ScreeningInfo() {
     if (!loaded)
         return (<LoadingComponent/>)
 
-    const date = new Date(film.duration * 60 * 1000);
-    const strDate = moment(new Date(date.getDate() - date.getTimezoneOffset())).format('LT')
 
     return (
         <Container>
@@ -65,8 +63,7 @@ export default function ScreeningInfo() {
                 </Typography>
                 <Typography><span
                     style={{fontWeight: 'bolder'}}>Продолжительность: </span>
-                    {strDate}
-                    <span> ({film.duration} мин) </span>
+                    <span>{film.duration} мин</span>
                 </Typography>
                 <Typography fontWeight={'bolder'}>{screening.hall.name}</Typography>
             </Stack>
