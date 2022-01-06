@@ -1,3 +1,3 @@
-FROM httpd
-ARG BUILD_DIR=./build/
-COPY ${BUILD_DIR} /usr/local/apache2/htdocs/
+FROM node:16-slim
+COPY ./ ./
+RUN ["npm","start"]
