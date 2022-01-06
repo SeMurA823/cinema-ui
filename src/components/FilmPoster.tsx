@@ -33,7 +33,7 @@ export default function FilmPoster(props: Props) {
 
 
     return (
-        <Stack alignItems={'center'} direction={'row'} flexWrap={'wrap'}>
+        <Stack alignItems={'center'} direction={'row'} flexWrap={'wrap'} style={{maxWidth: '100%'}}>
             <Stack style={{width: 450}}>
                 <AliceCarousel items={items} animationDuration={2000} autoPlayInterval={30000} autoHeight autoWidth autoPlay disableButtonsControls infinite disableDotsControls/>
             </Stack>
@@ -58,7 +58,6 @@ export default function FilmPoster(props: Props) {
                 <Typography>
                     {film.plot}
                 </Typography>
-
             </Stack>
         </Stack>
     )
