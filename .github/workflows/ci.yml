@@ -19,6 +19,8 @@ jobs:
       - name: Docker Hub login
         run: docker login --username ${{ secrets.USERNAME_HUB }} --password ${{ secrets.PASSWORD_HUB }}
       - name: Use Node.js 16.x
+        env:
+          process.env.CI: false
         uses: actions/setup-node@v2
         with:
           node-version: 16.x
