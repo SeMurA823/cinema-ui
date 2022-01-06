@@ -197,7 +197,6 @@ function Header(props: Props) {
                                             <Link href={setting.link} underline={'none'} style={{display: 'block', width: '100%'}}>{setting.value}</Link>
                                         </MenuItem>
                                     ))}
-                                    <MenuItem divider/>
                                     <MenuItem onClick={()=>handleCloseNavMenu(LOGOUT_URL)}>
                                         <Link href={LOGOUT_URL} underline={'none'} style={{display: 'block', width: '100%'}}>Выйти</Link>
                                     </MenuItem>
