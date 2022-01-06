@@ -1,3 +1,4 @@
 FROM node:16-slim
 COPY ./ ./
-RUN ["npm","start"]
+CMD ["npm", "install"]
+CMD ["npm","start"]
