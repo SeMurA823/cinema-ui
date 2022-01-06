@@ -1,7 +1,5 @@
 import axios from "axios";
 import AuthService from "../services/AuthService";
-import {useContext} from "react";
-import {Context} from "../index";
 
 export const SERVER_URL = "http://semura.eastus.cloudapp.azure.com"
 

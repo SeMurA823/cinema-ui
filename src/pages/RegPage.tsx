@@ -41,10 +41,11 @@ export default function RegPage() {
     const onSubmit = async () => {
         try {
             setLoaded(false);
+            setError(false);
             await $api.post(`/auth/registration`, JSON.stringify({...user, ...password}));
             navigate('/signin');
         } catch (e) {
-            setError(true)
+            setError(true);
         } finally {
             setLoaded(true);
         }
@@ -118,7 +119,8 @@ export default function RegPage() {
                 <Stack direction={'row'} flexWrap={'wrap'} spacing={2} justifyContent='center'>
                     <TextField label='Пароль' type={'password'} value={password.password} id={'password'}
                                onChange={handleChangePassword}
-                               required error={password.repeatPassword !== password.password}/>
+                               helperText={'Минимум 6 символов'}
+                               required error={password.repeatPassword !== password.password || password.password?.length < 6}/>
                     <TextField label='Повторите пароль' type={'password'} value={password.repeatPassword}
                                id={'repeatPassword'} onChange={handleChangePassword}
                                required error={password.repeatPassword !== password.password}/>
