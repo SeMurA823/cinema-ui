@@ -38,11 +38,11 @@ export default function PremiereFilmsBlock() {
     return (
         <Stack spacing={2}>
             <Typography variant='h3' fontWeight='bolder'>Скоро</Typography>
-            <div style={{display: 'flex', flexDirection: 'row', flexWrap: 'wrap'}}>
+            <Stack direction={'row'} flexWrap={'wrap'} alignItems={'center'}>
                 {films.map(film=>(
                     <FilmCard film={film} key={film.id}/>
                 ))}
-            </div>
+            </Stack>
             {responseFilms.numberOfElements === 0 &&
                 <Stack justifyContent={'center'} alignItems={'center'}>
                     <Typography variant={'h4'} fontWeight={'bolder'}>Пусто</Typography>

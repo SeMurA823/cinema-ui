@@ -15,12 +15,12 @@ export default function FilmCard(props: Props) {
     const [loaded, setLoaded] = useState<boolean>(false);
 
     return (
-        <Card style={{margin: 10, maxWidth: 350}}>
+        <Card style={{margin: 10, width: 350}}>
             {props.film.posters.length > 0 &&
                 <div>
                     <CardMedia
                         component='img'
-                        height='260'
+                        height='450'
                         image={SERVER_URL + `/files/${film.posters[0].filename}`}
                         onLoad={() => setLoaded(true)}
                         style={{display: (loaded) ? 'block' : 'none'}}
