@@ -7,6 +7,7 @@ import {FilmType} from "../models/response/FilmTypes";
 import $api from "../http/config";
 import LoadingComponent from "../components/LoadingComponent";
 import ScreeningList from "../components/ScreeningList";
+import {FilmMakerComponent} from "../components/FilmMakerComponent";
 
 
 export default function FilmSubPage() {
@@ -41,6 +42,7 @@ export default function FilmSubPage() {
     return (
         <Container>
             <FilmPoster film={film}/>
+            <FilmMakerComponent film={film}/>
             <ScreeningList film={film}/>
         </Container>
     )
