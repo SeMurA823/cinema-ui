@@ -36,6 +36,7 @@ export const NotificationsInHeaderComponent = () => {
             } finally {
                 setLoaded(true);
             }
+            setTimeout(asyncFoo, 2000);
         };
         asyncFoo();
     }, [])
