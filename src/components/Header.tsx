@@ -1,6 +1,6 @@
 import {
     AppBar,
-    Avatar,
+    Avatar, Badge,
     Box,
     Button, Container,
     IconButton,
@@ -23,9 +23,11 @@ import {
     MenuBookOutlined,
     MenuOpenOutlined,
     MenuOutlined,
-    Movie,
+    Movie, Notifications, NotificationsOutlined,
     VideoFileOutlined
 } from "@mui/icons-material";
+import $api from "../http/config";
+import {NotificationsInHeaderComponent} from "./NotificationsInHeaderComponent";
 
 type TextLink = {
     value: string,
@@ -170,7 +172,8 @@ function Header(props: Props) {
                         }
 
                         {(store.isAuth && store.loaded) &&
-                            <Box sx={{flexGrow: 0}}>
+                            <Stack direction={'row'} spacing={1} sx={{flexGrow: 0}}>
+                                <NotificationsInHeaderComponent/>
                                 <Tooltip title="Open settings">
                                     <IconButton onClick={handleOpenUserMenu} sx={{p: 0}}>
                                         <Avatar>{store.user.lastName.charAt(0)}{store.user.firstName.charAt(0)}</Avatar>
@@ -201,7 +204,7 @@ function Header(props: Props) {
                                         <Link href={LOGOUT_URL} underline={'none'} style={{display: 'block', width: '100%'}}>Выйти</Link>
                                     </MenuItem>
                                 </Menu>
-                            </Box>
+                            </Stack>
                         }
                     </Toolbar>
                 </Container>

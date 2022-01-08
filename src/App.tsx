@@ -16,6 +16,7 @@ import PurchaseSubPage from "./pages/PurchaseSubPage";
 import ProfilePage from "./pages/ProfilePage";
 import LogoutPage from "./pages/LogoutPage";
 import RegPage from "./pages/RegPage";
+import {NotificationSubPage} from "./pages/NotificationSubPage";
 moment.locale('ru');
 
 export const ruMoment = (date: Date):moment.Moment => {
@@ -51,6 +52,7 @@ function App() {
                         <Route path='purchase' element={<AuthPage><PurchaseSubPage/></AuthPage>}/>
                         <Route path='profile' element={<AuthPage><ProfilePage/></AuthPage>}/>
                         <Route path='signup' element={<RegPage/>}/>
+                        <Route path='notifications' element={<NotificationSubPage/>}/>
                     </Route>
                     <Route path={LOGOUT_URL} element={<AuthPage><LogoutPage/></AuthPage>}/>
                     <Route path={LOGIN_URL} element={<LoginPage/>}/>
