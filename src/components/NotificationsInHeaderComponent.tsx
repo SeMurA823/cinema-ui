@@ -73,7 +73,9 @@ export const NotificationsInHeaderComponent = () => {
                 {notifications.length !== 0 &&
                     notifications.map(notification => (
                         <MenuItem key={notification.id} onClick={() => handleCloseNavMenu()}>
-                            {notification.message}
+                            <Typography>
+                                {notification.message}
+                            </Typography>
                         </MenuItem>
                     ))
                 }
