@@ -14,3 +14,7 @@ export type FilmType = {
     active: boolean,
     posters: Array<PosterType>
 }
+
+export type MarkType = {
+    mark: number;
+}
