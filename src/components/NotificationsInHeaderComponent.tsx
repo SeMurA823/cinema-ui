@@ -3,7 +3,6 @@ import $api from "../http/config";
 import {Badge, IconButton, Link, Menu, MenuItem, Tooltip, Typography} from "@mui/material";
 import {NotificationsOutlined} from "@mui/icons-material";
 import {Notification} from "../models/response/IUser";
-import {LOGOUT_URL} from "../App";
 
 export const NotificationsInHeaderComponent = () => {
 
@@ -31,12 +30,12 @@ export const NotificationsInHeaderComponent = () => {
             try {
                 const response = await $api.get<Notification[]>(`/notifications?new`);
                 setNotifications(response.data);
+                setTimeout(asyncFoo, 2000);
             } catch (e) {
                 setError(true);
             } finally {
                 setLoaded(true);
             }
-            setTimeout(asyncFoo, 2000);
         };
         asyncFoo();
     }, [])
