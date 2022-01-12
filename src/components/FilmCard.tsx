@@ -25,7 +25,6 @@ export default function FilmCard(props: Props) {
                             component='img'
                             height='450'
                             image={SERVER_URL + `/files/${film.posters[0].filename}`}
-                            onError={()=> setLoaded(true)}
                             onLoad={() => setLoaded(true)}
                             style={{display: (loaded) ? 'block' : 'none'}}
                         />

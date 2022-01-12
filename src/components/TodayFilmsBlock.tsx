@@ -5,6 +5,7 @@ import $api from "../http/config";
 import {Button, Skeleton, Stack, Typography} from "@mui/material";
 import '@fontsource/ubuntu';
 import FilmCard from "./FilmCard";
+import {ruMoment} from "../App";
 
 export default function TodayFilmsBlock() {
     const [responseFilms, setResponseFilms] = useState<IPage<FilmType>>({number: -1, size: 10} as IPage<FilmType>);
@@ -17,7 +18,7 @@ export default function TodayFilmsBlock() {
 
     async function getTodayFilms() {
         try {
-            let response = await $api.get<IPage<FilmType>>(`/screenings/todayfilms?page=${responseFilms.number + 1}&size=${responseFilms.size}&sort=name,asc`);
+            let response = await $api.get<IPage<FilmType>>(`/screenings/films?start=${ruMoment(new Date()).startOf('day').toISOString()}&end=${ruMoment(new Date()).endOf('day').toISOString()}&page=${responseFilms.number + 1}&size=${responseFilms.size}&sort=name,asc`);
             setResponseFilms(response.data);
             const filmsId = films.map(x=>x.id);
             setFilms([...films, ...(response.data.content.filter(x=>!filmsId.includes(x.id)))]);
@@ -35,6 +36,7 @@ export default function TodayFilmsBlock() {
                 <Skeleton variant={'rectangular'} width={350} height={350}/>
             </Stack>
         )
+
     return (
         <Stack spacing={2}>
             <Typography variant='h3' fontWeight='bolder'>Сегодня в кино</Typography>

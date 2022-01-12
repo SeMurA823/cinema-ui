@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import $api from "../http/config";
 import {ScreeningType} from "../models/response/ScreeningTypes";
 import {Navigate} from "react-router-dom";
-import {NOT_FOUND_URL} from "../App";
+import {NOT_FOUND_URL, ruMoment} from "../App";
 import {Badge, Button, Skeleton, Stack, Typography} from "@mui/material";
 import moment from "moment/moment";
 import 'moment/locale/ru'
@@ -27,7 +27,8 @@ export default function ScreeningListItem(props: Props) {
             setHalls([]);
             setScreenings(new Map());
             try {
-                let response = await $api.get<Array<ScreeningType>>(`/screenings?film=${props.filmId}&date=${date.toISOString()}`);
+                const response =
+                    await $api.get<Array<ScreeningType>>(`/screenings?film=${props.filmId}&start=${ruMoment(date).startOf("day").toISOString()}&end=${ruMoment(date).endOf('day').toISOString()}`);
                 const newItems = response.data;
                 const localeMapScreenings = new Map();
                 const localeHalls: HallType[] = [];

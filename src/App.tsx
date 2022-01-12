@@ -17,6 +17,7 @@ import ProfilePage from "./pages/ProfilePage";
 import LogoutPage from "./pages/LogoutPage";
 import RegPage from "./pages/RegPage";
 import {NotificationSubPage} from "./pages/NotificationSubPage";
+
 moment.locale('ru');
 
 export const ruMoment = (date: Date):moment.Moment => {
@@ -57,7 +58,7 @@ function App() {
                     <Route path={LOGOUT_URL} element={<AuthPage><LogoutPage/></AuthPage>}/>
                     <Route path={LOGIN_URL} element={<LoginPage/>}/>
                     <Route path={NOT_FOUND_URL} element={<NotFound/>}/>
-                    <Route path="*" element={<Navigate to={NOT_FOUND_URL}/>}/>
+                    {/*<Route path="*" element={<Navigate to={NOT_FOUND_URL}/>}/>*/}
                 </Routes>
             </BrowserRouter>
         </ThemeProvider>

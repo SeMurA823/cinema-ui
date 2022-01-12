@@ -19,6 +19,8 @@ export default function FilmSubPage() {
     const [error, setError] = useState<boolean>(false);
 
     useEffect(()=>{
+        setLoaded(false);
+        setError(false);
         async function asyncFoo() {
             try {
                 const response = await $api.get<FilmType>(`/films/${id}`);
@@ -34,10 +36,10 @@ export default function FilmSubPage() {
         }
     },[])
 
+    if (!loaded) return <LoadingComponent/>
+
     if (!id || Number.isNaN(Number(id)) || (loaded && error))
         return (<Navigate to={NOT_FOUND_URL}/>);
-
-    if (!loaded) return <LoadingComponent/>
 
     return (
         <Container>

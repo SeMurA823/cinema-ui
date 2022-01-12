@@ -7,8 +7,7 @@ export default class AuthService {
     static async login(username: string, password: string, rememberMe: boolean): Promise<AxiosResponse<AuthResponse>> {
         return $api.post<AuthResponse>('/auth?login', JSON.stringify({
             username: username,
-            password: password,
-            rememberMe: rememberMe
+            password: password
         } as ILogin), {withCredentials: true})
     }
 
