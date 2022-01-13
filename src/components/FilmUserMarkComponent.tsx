@@ -23,7 +23,7 @@ export const FilmUserMarkComponent = (props: Props) => {
         setLoadedMark(false);
         setErrorMark(false);
         try {
-            let response = await $api.post<MarkType>(`/rating/mark?film=${props.film.id}`, userMark * 2);
+            let response = await $api.post<MarkType>(`/rating/mark?film=${props.film.id}`, userMark);
             setUserMark(response.data.mark);
             props.onClose();
         } catch (e) {
@@ -48,8 +48,7 @@ export const FilmUserMarkComponent = (props: Props) => {
                 <Stack alignItems={'center'} spacing={2}>
                     <Stack direction={'row'} spacing={1} alignItems={'center'} justifyContent={'center'}>
                         <Rating
-                            precision={0.5}
-                            max={5}
+                            max={10}
                             icon={<Star color={'primary'} fontSize={'large'}/>}
                             emptyIcon={<StarBorder color={'primary'} fontSize={'large'}/>}
                             value={userMark}
@@ -57,7 +56,7 @@ export const FilmUserMarkComponent = (props: Props) => {
                         />
                         <Chip color={'primary'} label={
                             (<Typography fontWeight={'bold'} fontSize={'larger'}>
-                                {userMark * 2}
+                                {userMark}
                             </Typography>)}/>
                     </Stack>
                     {userMark > 0 &&

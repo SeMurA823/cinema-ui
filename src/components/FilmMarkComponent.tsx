@@ -5,6 +5,7 @@ import {Done} from "@mui/icons-material";
 import {Context} from "../index";
 import $api from "../http/config";
 import {FilmUserMarkComponent} from "./FilmUserMarkComponent";
+import moment from "moment";
 
 
 type Props = {
@@ -34,8 +35,13 @@ export const FilmMarkComponent = (props: Props) => {
     const getRating = async () => {
         setLoaded(false);
         try {
-            let response = await $api.get<number>(`/rating?film=${props.film.id}`);
-            setRating(response.data);
+            if (moment(new Date(props.film.localPremiere)).isBefore(moment())) {
+                let response = await $api.get<number>(`/rating?film=${props.film.id}`);
+                setRating(response.data);
+            } else {
+                setRating(0.);
+            }
+
         } finally {
             setLoaded(true);
         }
@@ -48,8 +54,12 @@ export const FilmMarkComponent = (props: Props) => {
     const getUserMark = async () => {
         setLoaded(false);
         try {
-            let axiosResponse = await $api.get<MarkType>(`/rating/mark?film=${props.film.id}`);
-            setUserMark(axiosResponse.data.mark);
+            if (moment(new Date(props.film.localPremiere)).isBefore(moment())) {
+                let axiosResponse = await $api.get<MarkType>(`/rating/mark?film=${props.film.id}`);
+                setUserMark(axiosResponse.data.mark);
+            } else {
+                setUserMark(null);
+            }
         } catch (e) {
             setUserMark(null);
         } finally {
@@ -71,7 +81,7 @@ export const FilmMarkComponent = (props: Props) => {
     return (
         <Stack direction={'column'} spacing={2} alignItems={'start'}>
             <Button color={getColor(rating)} size={'large'} variant={'contained'} style={{borderRadius: 20}}
-                    disabled={!loaded} onClick={store.isAuth?(() => setOpenDialog(true)):(()=>{})}>
+                    disabled={!loaded} onClick={(store.isAuth && moment(new Date(props.film.localPremiere)).isBefore(moment()))?(() => setOpenDialog(true)):(()=>{})}>
                 {rating > 0 &&
                     <Stack direction={'row'} spacing={2} alignItems={'center'}>
                         {label}

@@ -28,7 +28,7 @@ export default function ScreeningListItem(props: Props) {
             setScreenings(new Map());
             try {
                 const response =
-                    await $api.get<Array<ScreeningType>>(`/screenings?film=${props.filmId}&start=${ruMoment(date).startOf("day").toISOString()}&end=${ruMoment(date).endOf('day').toISOString()}`);
+                    await $api.get<Array<ScreeningType>>(`/screenings?film=${props.filmId}&start=${encodeURIComponent(ruMoment(date).startOf("day").toISOString(true))}&end=${encodeURIComponent(ruMoment(date).endOf('day').toISOString(true))}`);
                 const newItems = response.data;
                 const localeMapScreenings = new Map();
                 const localeHalls: HallType[] = [];

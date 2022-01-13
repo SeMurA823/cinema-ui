@@ -17,7 +17,7 @@ export default function TicketComponent() {
         try {
             setLoaded(false);
             const response = await $api
-                .get<IPage<TicketType>>(`/tickets/mytickets?page=${page - 1}&size=${size}&sort=filmScreening.date,desc`);
+                .get<IPage<TicketType>>(`/tickets/mytickets?page=${page - 1}&size=${size}&sort=filmScreening.date,asc`);
             setTicketPage(response.data);
         } catch (e) {
             setError(true);

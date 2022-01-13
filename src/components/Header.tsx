@@ -1,8 +1,9 @@
 import {
     AppBar,
-    Avatar, Badge,
+    Avatar,
     Box,
-    Button, Container,
+    Button,
+    Container,
     IconButton,
     Link,
     Menu,
@@ -18,15 +19,7 @@ import {useContext, useEffect} from "react";
 import {Context} from "../index";
 import {LOGIN_URL, LOGOUT_URL} from "../App";
 import {observer} from "mobx-react-lite";
-import {
-    CameraIndoor,
-    MenuBookOutlined,
-    MenuOpenOutlined,
-    MenuOutlined,
-    Movie, Notifications, NotificationsOutlined,
-    VideoFileOutlined
-} from "@mui/icons-material";
-import $api from "../http/config";
+import {MenuOutlined} from "@mui/icons-material";
 import {NotificationsInHeaderComponent} from "./NotificationsInHeaderComponent";
 
 type TextLink = {

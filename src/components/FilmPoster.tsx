@@ -51,7 +51,7 @@ export default function FilmPoster(props: Props) {
                         style={{fontWeight: 'bolder'}}>Премьера в России: </span>{moment(new Date(film.localPremiere)).format('L')}
                 </Typography>
                 <Typography>
-                    <span style={{fontWeight: 'bolder'}}>Продолжительность: </span>{film.duration} мин
+                    <span style={{fontWeight: 'bolder'}}>Продолжительность: </span>{film.duration===0?'-':film.duration + ' мин'}
                 </Typography>
                 <Typography>
                     {film.plot}

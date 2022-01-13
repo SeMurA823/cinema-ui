@@ -30,7 +30,7 @@ export const NotificationsInHeaderComponent = () => {
             try {
                 const response = await $api.get<Notification[]>(`/notifications?new`);
                 setNotifications(response.data);
-                setTimeout(asyncFoo, 2000);
+                setTimeout(asyncFoo, 5000);
             } catch (e) {
                 setError(true);
             } finally {

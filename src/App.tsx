@@ -36,7 +36,6 @@ const theme = createTheme({
 export const NOT_FOUND_URL = '/notfound';
 export const LOGIN_URL = '/signin';
 export const LOGOUT_URL = '/logout'
-export const REG_URL = '/signup';
 
 function App() {
     return (
@@ -58,7 +57,7 @@ function App() {
                     <Route path={LOGOUT_URL} element={<AuthPage><LogoutPage/></AuthPage>}/>
                     <Route path={LOGIN_URL} element={<LoginPage/>}/>
                     <Route path={NOT_FOUND_URL} element={<NotFound/>}/>
-                    {/*<Route path="*" element={<Navigate to={NOT_FOUND_URL}/>}/>*/}
+                    <Route path="*" element={<Navigate to={NOT_FOUND_URL}/>}/>
                 </Routes>
             </BrowserRouter>
         </ThemeProvider>

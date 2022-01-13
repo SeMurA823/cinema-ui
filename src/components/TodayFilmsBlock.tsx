@@ -18,10 +18,13 @@ export default function TodayFilmsBlock() {
 
     async function getTodayFilms() {
         try {
-            let response = await $api.get<IPage<FilmType>>(`/screenings/films?start=${ruMoment(new Date()).startOf('day').toISOString()}&end=${ruMoment(new Date()).endOf('day').toISOString()}&page=${responseFilms.number + 1}&size=${responseFilms.size}&sort=name,asc`);
+            let response = await $api.get<IPage<FilmType>>(`/screenings/films?`
+                + `start=${encodeURIComponent(ruMoment(new Date()).startOf('week').toISOString(true))}`
+                + `&end=${encodeURIComponent(ruMoment(new Date()).endOf('week').toISOString(true))}`
+                + `&page=${responseFilms.number + 1}&size=${responseFilms.size}&sort=name,asc`);
             setResponseFilms(response.data);
-            const filmsId = films.map(x=>x.id);
-            setFilms([...films, ...(response.data.content.filter(x=>!filmsId.includes(x.id)))]);
+            const filmsId = films.map(x => x.id);
+            setFilms([...films, ...(response.data.content.filter(x => !filmsId.includes(x.id)))]);
         } catch (e) {
             console.log(e);
         } finally {
@@ -31,17 +34,19 @@ export default function TodayFilmsBlock() {
 
     if (!loaded)
         return (
-            <Stack spacing={2}>
-                <Typography variant='h3' fontWeight='bolder'>Сегодня в кино</Typography>
-                <Skeleton variant={'rectangular'} width={350} height={350}/>
+            <Stack spacing={2} alignItems={'center'}>
+                <Typography variant='h3' fontWeight='bolder'>В кино на этой неделе</Typography>
+                <Stack direction={'row'} justifyContent={'center'} alignItems={'center'}>
+                    <Skeleton variant={'rectangular'} width={350} height={350}/>
+                </Stack>
             </Stack>
         )
 
     return (
-        <Stack spacing={2}>
-            <Typography variant='h3' fontWeight='bolder'>Сегодня в кино</Typography>
-            <Stack direction={'row'} flexWrap={'wrap'} alignItems={'center'}>
-                {films.map(film=>(
+        <Stack spacing={2} alignItems={'center'}>
+            <Typography variant='h3' fontWeight='bolder'>В кино на этой неделе</Typography>
+            <Stack direction={'row'} flexWrap={'wrap'} alignItems={'center'} justifyContent={'center'}>
+                {films.map(film => (
                     <FilmCard film={film} key={film.id}/>
                 ))}
             </Stack>
