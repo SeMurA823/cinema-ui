@@ -19,8 +19,8 @@ export default function TodayFilmsBlock() {
     async function getTodayFilms() {
         try {
             let response = await $api.get<IPage<FilmType>>(`/screenings/films?`
-                + `start=${encodeURIComponent(ruMoment(new Date()).startOf('week').toISOString(true))}`
-                + `&end=${encodeURIComponent(ruMoment(new Date()).endOf('week').toISOString(true))}`
+                + `start=${encodeURIComponent(ruMoment(new Date()).startOf('week').toISOString(false))}`
+                + `&end=${encodeURIComponent(ruMoment(new Date()).endOf('week').toISOString(false))}`
                 + `&page=${responseFilms.number + 1}&size=${responseFilms.size}&sort=name,asc`);
             setResponseFilms(response.data);
             const filmsId = films.map(x => x.id);
