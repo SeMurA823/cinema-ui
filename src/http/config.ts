@@ -1,4 +1,5 @@
 import axios from "axios";
+import moment from "moment";
 import AuthService from "../services/AuthService";
 
 export const SERVER_URL = "http://semura.eastus.cloudapp.azure.com"
@@ -16,10 +17,26 @@ const $api = axios.create({
     headers: {
         'Content-Type': 'application/json'
     }
-})
+});
+
+type AccessTokenPayment = {
+    sub: string,
+    exp: number,
+    iat: number
+}; 
+
+export const isTokenExpired = () => {
+    const token = localStorage.getItem('token');
+    if (!token) return true;
+    const strToken = token as string;
+    const payment = atob(strToken.split('.')[1]);
+    const paymentObj = JSON.parse(payment) as AccessTokenPayment;
+    const exp = paymentObj.exp;
+    return moment(new Date(exp)).isBefore(moment());
+}
 
 $api.interceptors.request.use((config) => {
-    if (localStorage.getItem('token')) {
+    if (!isTokenExpired()) {
         // @ts-ignore
         config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
     }
