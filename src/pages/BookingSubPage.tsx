@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from "react";
 import {SeatType} from "../models/response/HallTypes";
-import {useNavigate, useSearchParams} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import $api from "../http/config";
 import {ReservationType} from "../models/response/PurchasesTypes";
-import {CircularProgress, Container, Stack, Typography} from "@mui/material";
+import {CircularProgress, Stack, Typography} from "@mui/material";
 
 type RequestBody = {
     seat: {
@@ -19,7 +19,8 @@ export default function BookingSubPage() {
 
     const [loaded, setLoaded] = useState<boolean>(false);
     const navigate = useNavigate();
-    const [error, setError] = useState<boolean>(false)
+
+    let mounted = false;
 
     const convert = (seat: SeatType, screeningId: number): RequestBody => {
         return {
@@ -33,6 +34,7 @@ export default function BookingSubPage() {
 
     useEffect(() => {
         setLoaded(false);
+        mounted = true;
         if (screening && Number.isInteger(Number(screening))) {
             const jsonSeats = localStorage.getItem(screening);
             localStorage.removeItem(String(screening));
@@ -43,22 +45,24 @@ export default function BookingSubPage() {
                     try {
                         await $api.post<Array<ReservationType>>(`/booking/create`,
                             JSON.stringify(seats.map<RequestBody>(s => convert(s, Number(screening)))));
-                        navigate(`/purchase?screening=${screening}`)
+                        if (mounted)
+                            navigate(`/purchase?screening=${screening}`)
                     } catch (e) {
-                        navigate(-1);
+                        if (mounted)
+                            navigate(-1);
                     } finally {
-                        setLoaded(true);
+                        if (mounted)
+                            setLoaded(true);
                     }
                 };
                 asyncFoo()
-                return () => {};
-            }
+            } else
+                navigate(-1);
         }
-        setLoaded(true);
+        if (mounted)
+            setLoaded(true);
+        return () => {mounted = false};
     }, [])
-
-    if (loaded)
-        navigate(-1);
 
     return (
         <Stack justifyContent='center' alignItems='center'>
