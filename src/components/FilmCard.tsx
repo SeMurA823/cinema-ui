@@ -4,20 +4,24 @@ import {FilmType} from "../models/response/FilmTypes";
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {FilmMarkComponent} from "./FilmMarkComponent";
+import moment, {Moment} from "moment";
 
 type Props = {
     film: FilmType,
+    date?: Moment
 }
 
 export default function FilmCard(props: Props) {
     const navigate = useNavigate();
     let film = props.film;
 
+    const date = props.date?props.date.startOf('date'):moment().startOf('date');
+
     const [loaded, setLoaded] = useState<boolean>(false);
 
     return (
         <Card style={{margin: 10, width: 350, cursor: 'pointer'}}
-              onClick={() => navigate(`/films/${film.id}`)}>
+              onClick={() => navigate(`/films/${film.id}?date=${date}`)}>
             <Stack position={'relative'}>
                 {props.film.posters.length > 0 &&
                     <div>

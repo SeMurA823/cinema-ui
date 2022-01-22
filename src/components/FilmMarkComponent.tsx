@@ -26,6 +26,8 @@ export const FilmMarkComponent = (props: Props) => {
 
     let {store} = useContext(Context);
 
+    let mounted = false;
+
     const [rating, setRating] = useState<number>(0.);
     const [openDialog, setOpenDialog] = useState<boolean>(false);
     const [userMark, setUserMark] = useState<number | null>(null);
@@ -33,22 +35,27 @@ export const FilmMarkComponent = (props: Props) => {
     const [loaded, setLoaded] = useState<boolean>(false);
 
     const getRating = async () => {
+        mounted = true;
         setLoaded(false);
         try {
             if (moment(new Date(props.film.localPremiere)).isBefore(moment())) {
                 let response = await $api.get<number>(`/rating?film=${props.film.id}`);
-                setRating(response.data);
+                if (mounted)
+                    setRating(response.data)
             } else {
-                setRating(0.);
+                if (mounted)
+                    setRating(0.)
             }
 
         } finally {
-            setLoaded(true);
+            if (mounted)
+                setLoaded(true);
         }
     };
 
     useEffect(() => {
         getRating();
+        return ()=>{mounted = false;}
     }, [openDialog])
 
     const getUserMark = async () => {
@@ -56,14 +63,17 @@ export const FilmMarkComponent = (props: Props) => {
         try {
             if (moment(new Date(props.film.localPremiere)).isBefore(moment())) {
                 let axiosResponse = await $api.get<MarkType>(`/rating/mark?film=${props.film.id}`);
-                setUserMark(axiosResponse.data.mark);
+                if (mounted)
+                    setUserMark(axiosResponse.data.mark);
             } else {
-                setUserMark(null);
+                if (mounted)
+                    setUserMark(null);
             }
         } catch (e) {
             setUserMark(null);
         } finally {
-            setLoaded(true);
+            if (mounted)
+                setLoaded(true);
         }
     };
 
@@ -76,7 +86,7 @@ export const FilmMarkComponent = (props: Props) => {
         setOpenDialog(false);
     }
 
-    const label = (<Typography fontWeight={'bold'}>{loaded ? rating.toFixed(1) : '∞'}</Typography>)
+    const label = (<Typography fontWeight={'bold'}>{loaded ? rating.toFixed(2) : '∞'}</Typography>)
 
     return (
         <Stack direction={'column'} spacing={2} alignItems={'start'}>
@@ -85,16 +95,14 @@ export const FilmMarkComponent = (props: Props) => {
                 {rating > 0 &&
                     <Stack direction={'row'} spacing={2} alignItems={'center'}>
                         {label}
-                        {userMark &&
-                            <Chip label={userMark} icon={<Done/>}/>
-                        }
+                        <Chip label={userMark} icon={<Done/>} style={{display: (userMark && userMark > 0)?'flex':"none"}}/>
                     </Stack>
                 }
                 {rating === 0 &&
                     (<Typography fontWeight={'bold'}>-</Typography>)
                 }
             </Button>
-            <FilmUserMarkComponent defaultValue={userMark ? userMark : 0} film={props.film} open={openDialog}
+            <FilmUserMarkComponent defaultValue={userMark?userMark:0} film={props.film} open={openDialog}
                                    onClose={handleCloseDialog}/>
         </Stack>
 

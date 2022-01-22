@@ -6,6 +6,8 @@ import {Notification} from "../models/response/IUser";
 
 export const NotificationsInHeaderComponent = () => {
 
+    let mounted = false;
+
     const [notifications, setNotifications] = useState<Notification[]>([]);
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
@@ -24,20 +26,28 @@ export const NotificationsInHeaderComponent = () => {
     const [loaded, setLoaded] = useState<boolean>(false);
 
     useEffect(() => {
+        mounted = true;
         const asyncFoo = async () => {
-            setLoaded(false);
-            setError(false);
+            if (mounted) {
+                setLoaded(false);
+                setError(false);
+            }
             try {
                 const response = await $api.get<Notification[]>(`/notifications?new`);
-                setNotifications(response.data);
-                setTimeout(asyncFoo, 5000);
+                if (mounted) {
+                    setNotifications(response.data);
+                    setTimeout(asyncFoo, 5000);
+                }
             } catch (e) {
-                setError(true);
+                if (mounted)
+                    setError(true);
             } finally {
-                setLoaded(true);
+                if (mounted)
+                    setLoaded(true);
             }
         };
         asyncFoo();
+        return ()=>{mounted = false};
     }, [])
 
     return (
