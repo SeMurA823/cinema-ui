@@ -108,7 +108,7 @@ export default function RegPage() {
                         ...user,
                         gender: e.target.value
                     })}>
-                        <MenuItem value={''}>Не указано</MenuItem>
+                        {/*<MenuItem value={''}>Не указано</MenuItem>*/}
                         <MenuItem value={'Male'}>Мужчина</MenuItem>
                         <MenuItem value={'Female'}>Женщина</MenuItem>
                     </Select>

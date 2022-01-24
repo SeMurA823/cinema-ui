@@ -81,7 +81,7 @@ export default function ProfileComponent() {
                     ...user,
                     gender: e.target.value
                 })}>
-                    <MenuItem value={'None'}>Не указано</MenuItem>
+                    {/*<MenuItem value={'None'}>Не указано</MenuItem>*/}
                     <MenuItem value={'Male'}>Мужчина</MenuItem>
                     <MenuItem value={'Female'}>Женщина</MenuItem>
                 </Select>
