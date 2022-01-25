@@ -27,17 +27,14 @@ export default class Store {
 
     async login(username: string, password: string, rememberMe: boolean) {
         try {
+            this.setAuth(false);
             this.setLoaded(false);
-            const response = await AuthService.login(username, password, rememberMe);
-            localStorage.setItem(TOKEN_KEY, response.data.accessToken);
+            const response = await AuthService.login(username, password);
+            localStorage.setItem(TOKEN_KEY, response.data?.accessToken);
             const responseUser = await UserService.getUser();
             console.log(responseUser.data);
-            this.setUser(responseUser.data);
+            this.setUser(responseUser?.data);
             this.setAuth(true);
-            this.setLoaded(true);
-        } catch (e) {
-            this.setAuth(false);
-            throw e;
         } finally {
             this.setLoaded(true);
         }

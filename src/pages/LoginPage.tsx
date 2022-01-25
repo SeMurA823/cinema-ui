@@ -1,20 +1,10 @@
 import React, {useContext, useEffect, useState} from "react";
-import {
-    Alert,
-    Button,
-    ButtonGroup,
-    CircularProgress,
-    FormLabel,
-    Link,
-    Stack,
-    TextField,
-    Typography
-} from "@mui/material";
+import {Alert, Button, ButtonGroup, CircularProgress, Link, Stack, TextField, Typography} from "@mui/material";
 import {useNavigate} from "react-router-dom";
 import {Context} from "../index";
 import axios, {AxiosError} from "axios";
 import {ErrorType} from "../models/response/ErrorTypes";
-import { observer } from "mobx-react-lite";
+import {observer} from "mobx-react-lite";
 
 function LoginPage() {
     const navigate = useNavigate();
@@ -35,11 +25,13 @@ function LoginPage() {
     },[])
 
     const onLogin = async () => {
+        setError(null);
         setLoaded(false);
         try {
             await store.login(username, password, rememberMe);
             navigate(-1);
         } catch (e) {
+            console.log(e);
             if (axios.isAxiosError(e)) {
                 const axiosError = e as AxiosError;
                 const code = axiosError.response?.status;

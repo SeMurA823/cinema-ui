@@ -64,15 +64,15 @@ $api.interceptors.response.use((config) => {
     if (!localStorage.getItem(TOKEN_KEY))
         return ;
     if (error.response.status === 401 || error.response.status === 403) {
-        // if (error.config && !error.config._isRetry && !refreshing) {
-        //     refreshing = true;
-        //     refreshRequest = AuthService.refresh();
-        //     const response = await refreshRequest;
-        //     localStorage.setItem(TOKEN_KEY, response.data.accessToken);
-        //     originalRequest._isRetry = true;
-        //     refreshing = false;
-        //     return $api.request(originalRequest);
-        // }
+        if (error.config && !error.config._isRetry && !refreshing) {
+            refreshing = true;
+            refreshRequest = AuthService.refresh();
+            const response = await refreshRequest;
+            localStorage.setItem(TOKEN_KEY, response.data.accessToken);
+            originalRequest._isRetry = true;
+            refreshing = false;
+            return $api.request(originalRequest);
+        }
         if (refreshing) {
             await refreshRequest;
             return $api.request(originalRequest);
