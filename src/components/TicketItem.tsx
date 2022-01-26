@@ -1,6 +1,6 @@
 import {TicketType} from "../models/response/PurchasesTypes";
 import {Button, Link, Stack, Typography} from "@mui/material";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import $api from "../http/config";
 import {FilmType} from "../models/response/FilmTypes";
 import {ruMoment} from "../App";
@@ -9,6 +9,7 @@ import moment from "moment";
 
 type Props = {
     ticket: TicketType,
+    film: FilmType
 }
 
 export default function TicketItem(props: Props) {
@@ -17,27 +18,10 @@ export default function TicketItem(props: Props) {
 
     const navigate = useNavigate();
 
-    const [film, setFilm] = useState<FilmType>({} as FilmType);
-
-    const [loaded, setLoaded] = useState<boolean>(false);
+    const [loaded, setLoaded] = useState<boolean>(true);
     const [error, setError] = useState<boolean>(false);
-    const [canceled, setCanceled] = useState<boolean>(false);
+    const [canceled, setCanceled] = useState<boolean>(!props.ticket.active);
 
-    const getFilm = async () => {
-        mounted = true;
-        try {
-            setLoaded(false);
-            const filmResponse = await $api.get<FilmType>(`/screenings/${props.ticket.filmScreening.id}/film`);
-            if (mounted)
-                setFilm(filmResponse.data);
-        } catch (e) {
-            if (mounted)
-                setError(true);
-        } finally {
-            if (mounted)
-                setLoaded(true);
-        }
-    }
 
     const returnTicket = async () => {
         setLoaded(false);
@@ -49,10 +33,6 @@ export default function TicketItem(props: Props) {
         }
     }
 
-    useEffect(()=>{
-        getFilm();
-        return ()=>{mounted = false}
-    }, [])
 
     const screeningMoment = moment(new Date(props.ticket.filmScreening.date));
     return (
@@ -63,11 +43,12 @@ export default function TicketItem(props: Props) {
                     <span>{props.ticket.id}</span>
                 </Typography>
                 <Typography fontWeight='bold' style={{cursor: 'pointer'}}>
-                    <Link href={`/films/${film.id}`}>
-                        {film.name}
+                    <Link href={`/films/${props.film.id}`}>
+                        {props.film.name}
                     </Link>
                 </Typography>
-                <Typography fontWeight='bolder'>{ruMoment(new Date(props.ticket.filmScreening.date)).format('LLLL')}</Typography>
+                <Typography
+                    fontWeight='bolder'>{ruMoment(new Date(props.ticket.filmScreening.date)).format('LLLL')}</Typography>
                 <Typography>
                     <span style={{color: 'skyblue', fontWeight: 'bolder'}}>
                         {props.ticket.filmScreening.hall.name}
@@ -81,7 +62,10 @@ export default function TicketItem(props: Props) {
                         Место: {props.ticket.seat.number}
                     </span>
                 </Typography>
-                {(!canceled && moment().add(3,'day').isBefore(screeningMoment)) &&
+                <Typography>
+                    <span style={{fontWeight: 'bold'}}>Стоимость:</span> {props.ticket.price} ₽
+                </Typography>
+                {(!canceled && moment().add(3, 'day').isBefore(screeningMoment)) &&
                     <Button color={'inherit'} variant={'outlined'} onClick={() => returnTicket()} disabled={!loaded}>
                         Вернуть
                     </Button>
