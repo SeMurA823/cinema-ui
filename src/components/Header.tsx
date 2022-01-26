@@ -84,6 +84,10 @@ function Header(props: Props) {
         asyncFoo();
     }, [])
 
+    useEffect(() => {
+
+    }, [store.isAuth])
+
 
     return (
         <>
