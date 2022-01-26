@@ -54,6 +54,20 @@ export default class Store {
         }
     }
 
+    async logoutAll() {
+        try {
+            this.setLoaded(false);
+            const response = await AuthService.logoutAll();
+            localStorage.removeItem(TOKEN_KEY);
+            this.setAuth(false);
+            this.setUser({} as IUser);
+        } catch (e) {
+            console.log(e);
+        } finally {
+            this.setLoaded(true);
+        }
+    }
+
     async refresh() {
         if (this.promiseRefresh) {
             await this.promiseRefresh;

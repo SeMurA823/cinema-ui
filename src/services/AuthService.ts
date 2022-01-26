@@ -17,12 +17,17 @@ export default class AuthService {
         return $api.post<AuthResponse>('/auth/logout', JSON.stringify({}));
     }
 
+    static async logoutAll(): Promise<AxiosResponse<AuthResponse>> {
+        return $api.post<AuthResponse>('/auth/logout?all', JSON.stringify({}));
+    }
+
     static async refresh(): Promise<any> {
         if (localStorage.getItem(TOKEN_KEY)) {
             return axios.post<AuthResponse>(`${API_URL}/auth?refresh`, {}, {
                 withCredentials: true
             })
         }
-        return new Promise(()=>{});
+        return new Promise(() => {
+        });
     }
 }
