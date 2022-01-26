@@ -61,9 +61,9 @@ $api.interceptors.response.use((config) => {
     return config;
 }, async (error) => {
     const originalRequest = error.config;
-    if (!localStorage.getItem(TOKEN_KEY))
-        return ;
     if (error.response.status === 401 || error.response.status === 403) {
+        if (!localStorage.getItem(TOKEN_KEY))
+            return;
         if (error.config && !error.config._isRetry && !refreshing) {
             refreshing = true;
             refreshRequest = AuthService.refresh();
