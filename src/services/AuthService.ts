@@ -6,17 +6,19 @@ import {ILogin} from "../models/request/ILogin";
 export const TOKEN_KEY = 'TOKEN_AUTH';
 
 export default class AuthService {
-    static async login(username: string, password: string, rememberMe: boolean): Promise<AxiosResponse<AuthResponse>> {
+    static async login(username: string, password: string): Promise<AxiosResponse<AuthResponse>> {
         return $api.post<AuthResponse>('/auth?login', JSON.stringify({
             username: username,
             password: password
-        } as ILogin), {withCredentials: true}).then(x => {
-            return x;
-        })
+        } as ILogin), {withCredentials: true})
     }
 
     static async logout(): Promise<AxiosResponse<AuthResponse>> {
         return $api.post<AuthResponse>('/auth/logout', JSON.stringify({}));
+    }
+
+    static async logoutAll(): Promise<AxiosResponse<AuthResponse>> {
+        return $api.post<AuthResponse>('/auth/logout?all', JSON.stringify({}));
     }
 
     static async refresh(): Promise<any> {
@@ -25,6 +27,7 @@ export default class AuthService {
                 withCredentials: true
             })
         }
-        return new Promise(()=>{});
+        return new Promise(() => {
+        });
     }
 }

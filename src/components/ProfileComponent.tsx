@@ -7,12 +7,16 @@ import {DatePicker, LocalizationProvider} from "@mui/lab";
 import moment from "moment";
 import $api from "../http/config";
 import PasswordEditComponent from "./PasswordEditComponent";
+import {useNavigate} from "react-router-dom";
 
 
 export default function ProfileComponent() {
     const {store} = useContext(Context);
 
     const [user, setUser] = useState<IUser>(store.user);
+
+
+    const navigate = useNavigate();
 
 
     const [edited, setEdited] = useState<boolean>(false);
@@ -50,15 +54,26 @@ export default function ProfileComponent() {
         }
     }
 
+    const logoutAll = async () => {
+        setLoaded(false);
+        try {
+            await store.logoutAll();
+        } finally {
+            setLoaded(true);
+            navigate('/');
+        }
+    }
+
 
     if (!loaded)
         return (<Skeleton style={{width: '100%', height: '420'}}/>)
 
     return (
-        <Stack spacing={2} >
+        <Stack spacing={2}>
             <Divider>Личная информация</Divider>
             <Stack alignItems={'center'} justifyContent='center' direction={'row'} flexWrap={'wrap'}>
-                <TextField label='Имя' value={user.firstName} id={'firstName'} onChange={handleChange} style={{margin: 10}}/>
+                <TextField label='Имя' value={user.firstName} id={'firstName'} onChange={handleChange}
+                           style={{margin: 10}}/>
                 <TextField label='Фамилия' value={user.lastName} id={'lastName'} onChange={handleChange} style={{margin: 10}}/>
             </Stack>
             <Stack flexWrap={'wrap'} spacing={2} justifyContent='center' direction={'row'}>
@@ -81,7 +96,7 @@ export default function ProfileComponent() {
                     ...user,
                     gender: e.target.value
                 })}>
-                    <MenuItem value={'None'}>Не указано</MenuItem>
+                    {/*<MenuItem value={'None'}>Не указано</MenuItem>*/}
                     <MenuItem value={'Male'}>Мужчина</MenuItem>
                     <MenuItem value={'Female'}>Женщина</MenuItem>
                 </Select>
@@ -101,6 +116,11 @@ export default function ProfileComponent() {
             }
             <Divider>Безопасность</Divider>
             <PasswordEditComponent/>
+            <Stack alignItems={'center'}>
+                <Button color={'error'} variant={'outlined'} onClick={() => {
+                    logoutAll()
+                }}>Выйти везде</Button>
+            </Stack>
 
         </Stack>
     )

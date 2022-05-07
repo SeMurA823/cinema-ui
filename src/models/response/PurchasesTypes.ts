@@ -7,7 +7,7 @@ export type TicketType = {
     seat: SeatType,
     price: number,
     filmScreening: ScreeningType,
-    isActive: boolean
+    active: boolean
 }
 
 export type PurchaseType = {

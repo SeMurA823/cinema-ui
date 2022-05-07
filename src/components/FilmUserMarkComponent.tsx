@@ -33,6 +33,20 @@ export const FilmUserMarkComponent = (props: Props) => {
         }
     }
 
+    const deleteMark = async () => {
+        setLoadedMark(false);
+        setErrorMark(false);
+        try {
+            await $api.delete(`/rating/mark?film=${props.film.id}`);
+            setUserMark(0);
+            props.onClose();
+        } catch (e) {
+            setErrorMark(true);
+        } finally {
+            setLoadedMark(true);
+        }
+    }
+
     let {store} = useContext(Context);
 
     if (!store.isAuth) return <></>
@@ -60,8 +74,16 @@ export const FilmUserMarkComponent = (props: Props) => {
                             </Typography>)}/>
                     </Stack>
                     {userMark > 0 &&
-                        <Button color={errorMark?'error':'primary'} variant={'outlined'} disabled={!loaded}
-                                onClick={() => uploadMark()}>OK</Button>
+                        <Button color={errorMark ? 'error' : 'primary'} variant={'outlined'} disabled={!loaded}
+                                onClick={() => uploadMark()}>
+                            OK
+                        </Button>
+                    }
+                    {userMark === 0 &&
+                        <Button color={'inherit'} variant={'outlined'} disabled={!loaded}
+                                onClick={() => deleteMark()}>
+                            Удалить
+                        </Button>
                     }
                 </Stack>
             </DialogContent>

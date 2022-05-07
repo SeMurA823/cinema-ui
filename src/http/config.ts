@@ -2,7 +2,7 @@ import axios from "axios";
 import moment from "moment";
 import AuthService, {TOKEN_KEY} from "../services/AuthService";
 
-export const SERVER_URL = "http://semura.eastus.cloudapp.azure.com"
+export const SERVER_URL = "http://cinemaapi.eastus.cloudapp.azure.com"
 // export const SERVER_URL = "http://localhost:8080"
 
 export const API_URL = `${SERVER_URL}/api`
@@ -38,11 +38,15 @@ export const isTokenExpired = () => {
 $api.interceptors.request.use(async (config) => {
     if (localStorage.getItem(TOKEN_KEY)) {
         if (isTokenExpired()) {
-            refreshing = true;
-            refreshRequest = AuthService.refresh();
-            const response = await refreshRequest;
-            localStorage.setItem(TOKEN_KEY, response.data.accessToken);
-            refreshing = false;
+            if (refreshing && refreshRequest) {
+                await refreshRequest;
+            } else {
+                refreshing = true;
+                refreshRequest = AuthService.refresh();
+                const response = await refreshRequest;
+                localStorage.setItem(TOKEN_KEY, response.data.accessToken);
+                refreshing = false;
+            }
         }
         // @ts-ignore
         config.headers.Authorization = `Bearer ${localStorage.getItem(TOKEN_KEY)}`;
@@ -57,9 +61,9 @@ $api.interceptors.response.use((config) => {
     return config;
 }, async (error) => {
     const originalRequest = error.config;
-    if (!localStorage.getItem(TOKEN_KEY))
-        return ;
     if (error.response.status === 401 || error.response.status === 403) {
+        if (!localStorage.getItem(TOKEN_KEY))
+            return;
         if (error.config && !error.config._isRetry && !refreshing) {
             refreshing = true;
             refreshRequest = AuthService.refresh();

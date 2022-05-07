@@ -7,7 +7,13 @@ export default class LoadingComponent extends React.Component<any, any> {
     }
     render() {
         return (
-            <div style={{width: '100%', height: '100%', justifyContent: 'center', alignItems: 'center'}}>
+            <div style={{
+                width: '100%',
+                height: '100%',
+                justifyContent: 'center',
+                alignItems: 'center',
+                display: 'flex'
+            }}>
                 <CircularProgress/>
             </div>
         );
