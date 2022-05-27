@@ -17,7 +17,9 @@ export default function PurchaseSubPage() {
     return (
         <Container>
             <Stack padding={2} alignItems={'center'}>
-                <ReservationList screeningId={Number(screening)} onChange={(reservations)=>{selected = reservations}}/>
+                <ReservationList screeningId={Number(screening)} onChange={(reservations) => {
+                    selected = reservations
+                }}/>
             </Stack>
         </Container>
     )

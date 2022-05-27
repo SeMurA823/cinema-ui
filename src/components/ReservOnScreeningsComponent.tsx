@@ -20,7 +20,7 @@ export default function ReservOnScreeningsComponent(props: Props) {
     const [error, setError] = useState<boolean>(false);
     const [open, setOpen] = useState<boolean>(false);
 
-    useEffect(()=>{
+    useEffect(() => {
         setLoaded(false);
         const asyncFoo = async () => {
             try {
@@ -37,7 +37,7 @@ export default function ReservOnScreeningsComponent(props: Props) {
             }
         }
         asyncFoo();
-    },[])
+    }, [])
 
     const items = screenings.map(screening => (
         <ListItem key={screening.id}>
@@ -73,7 +73,7 @@ export default function ReservOnScreeningsComponent(props: Props) {
 
     return (
         <div>
-            <LoadingButton onClick={()=>setOpen(true)} loading={!loaded}>
+            <LoadingButton onClick={() => setOpen(true)} loading={!loaded}>
                 <Badge color={'warning'} badgeContent={screenings.length}>
                     <Timelapse/>
                 </Badge>
@@ -81,7 +81,7 @@ export default function ReservOnScreeningsComponent(props: Props) {
             <Drawer
                 anchor='left'
                 open={open}
-                onClose={()=>setOpen(false)}
+                onClose={() => setOpen(false)}
             >
                 {list}
             </Drawer>

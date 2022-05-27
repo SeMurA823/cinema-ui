@@ -39,7 +39,7 @@ export const LogNotificationComponent = () => {
     return (
         <Stack alignItems={'center'} style={{cursor: 'default'}}>
             <Stack divider={<Divider/>} spacing={1}>
-                { notifications.totalElements !== 0 &&
+                {notifications.totalElements !== 0 &&
                     notifications.content.map(notification => (
                         <Stack key={notification.id}>
                             <Typography>{notification.message}</Typography>

@@ -5,6 +5,7 @@ export default class LoadingComponent extends React.Component<any, any> {
     constructor(props: any) {
         super(props);
     }
+
     render() {
         return (
             <div style={{

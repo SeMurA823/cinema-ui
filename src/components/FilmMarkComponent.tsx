@@ -55,7 +55,9 @@ export const FilmMarkComponent = (props: Props) => {
 
     useEffect(() => {
         getRating();
-        return ()=>{mounted = false;}
+        return () => {
+            mounted = false;
+        }
     }, [openDialog])
 
     const getUserMark = async () => {
@@ -91,18 +93,21 @@ export const FilmMarkComponent = (props: Props) => {
     return (
         <Stack direction={'column'} spacing={2} alignItems={'start'}>
             <Button color={getColor(rating)} size={'large'} variant={'contained'} style={{borderRadius: 20}}
-                    disabled={!loaded} onClick={(store.isAuth && moment(new Date(props.film.localPremiere)).isBefore(moment()))?(() => setOpenDialog(true)):(()=>{})}>
+                    disabled={!loaded}
+                    onClick={(store.isAuth && moment(new Date(props.film.localPremiere)).isBefore(moment())) ? (() => setOpenDialog(true)) : (() => {
+                    })}>
                 {rating > 0 &&
                     <Stack direction={'row'} spacing={2} alignItems={'center'}>
                         {label}
-                        <Chip label={userMark} icon={<Done/>} style={{display: (userMark && userMark > 0)?'flex':"none"}}/>
+                        <Chip label={userMark} icon={<Done/>}
+                              style={{display: (userMark && userMark > 0) ? 'flex' : "none"}}/>
                     </Stack>
                 }
                 {rating === 0 &&
                     (<Typography fontWeight={'bold'}>-</Typography>)
                 }
             </Button>
-            <FilmUserMarkComponent defaultValue={userMark?userMark:0} film={props.film} open={openDialog}
+            <FilmUserMarkComponent defaultValue={userMark ? userMark : 0} film={props.film} open={openDialog}
                                    onClose={handleCloseDialog}/>
         </Stack>
 

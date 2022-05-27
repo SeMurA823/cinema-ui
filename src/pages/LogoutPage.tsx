@@ -11,7 +11,7 @@ export default function LogoutPage() {
 
     const {store} = useContext(Context);
 
-    useEffect(()=>{
+    useEffect(() => {
         const asyncFoo = async () => {
             setLoaded(false);
             try {
@@ -23,7 +23,7 @@ export default function LogoutPage() {
             }
         }
         asyncFoo();
-    },[])
+    }, [])
 
     return (
         <LoadingComponent/>

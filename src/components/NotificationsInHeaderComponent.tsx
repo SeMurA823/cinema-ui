@@ -47,7 +47,9 @@ export const NotificationsInHeaderComponent = () => {
             }
         };
         asyncFoo();
-        return ()=>{mounted = false};
+        return () => {
+            mounted = false
+        };
     }, [])
 
     return (

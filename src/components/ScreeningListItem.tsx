@@ -80,7 +80,8 @@ export default function ScreeningListItem(props: Props) {
                         {screenings.get(hall.id)?.map(screening => (
                             <Badge badgeContent={(`${screening.price}₽`)} color={'primary'} style={{margin: 10}}
                                    key={screening.id}>
-                                <Button variant={'outlined'} href={`/screenings/${screening.id}`}>{moment(new Date(screening.date)).format("LT")}</Button>
+                                <Button variant={'outlined'}
+                                        href={`/screenings/${screening.id}`}>{moment(new Date(screening.date)).format("LT")}</Button>
                             </Badge>
                         ))}
                     </Stack>

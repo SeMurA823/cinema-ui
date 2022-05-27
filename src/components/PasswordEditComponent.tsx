@@ -37,7 +37,7 @@ export default function PasswordEditComponent() {
             }
             {(password !== '' && repeatPassword === password) &&
                 <Stack direction={'row'} justifyContent={'center'}>
-                    <Button onClick={()=>editPass()}>Изменить пароль</Button>
+                    <Button onClick={() => editPass()}>Изменить пароль</Button>
                 </Stack>
             }
         </Stack>

@@ -12,14 +12,16 @@ function AuthPage(props: Props) {
     const {store} = useContext(Context);
     const [loaded, setLoaded] = useState<boolean>(false);
 
-    useEffect(()=>{
+    useEffect(() => {
         setLoaded(false);
+
         async function asyncFoo() {
             await store.refresh();
             setLoaded(true);
         }
+
         asyncFoo();
-    },[])
+    }, [])
 
     if (!loaded)
         return (

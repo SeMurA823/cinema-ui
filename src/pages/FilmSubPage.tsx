@@ -18,9 +18,10 @@ export default function FilmSubPage() {
     const [loaded, setLoaded] = useState<boolean>(false);
     const [error, setError] = useState<boolean>(false);
 
-    useEffect(()=>{
+    useEffect(() => {
         setLoaded(false);
         setError(false);
+
         async function asyncFoo() {
             try {
                 const response = await $api.get<FilmType>(`/films/${id}`);
@@ -31,10 +32,11 @@ export default function FilmSubPage() {
                 setLoaded(true);
             }
         }
+
         if (id && !Number.isNaN(Number(id))) {
             asyncFoo();
         }
-    },[])
+    }, [])
 
     if (!loaded) return <LoadingComponent/>
 

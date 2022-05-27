@@ -13,7 +13,7 @@ export default function ProfilePage() {
     let [searchParams, setSearchParams] = useSearchParams();
 
     const getIndexByParams = () => {
-        const searchedParams = paramLabels.filter(x=>searchParams.has(x));
+        const searchedParams = paramLabels.filter(x => searchParams.has(x));
         if (searchedParams.length > 0)
             return paramLabels.indexOf(searchedParams[0]);
         return 0;

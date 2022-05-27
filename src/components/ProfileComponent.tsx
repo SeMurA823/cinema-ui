@@ -74,10 +74,12 @@ export default function ProfileComponent() {
             <Stack alignItems={'center'} justifyContent='center' direction={'row'} flexWrap={'wrap'}>
                 <TextField label='Имя' value={user.firstName} id={'firstName'} onChange={handleChange}
                            style={{margin: 10}}/>
-                <TextField label='Фамилия' value={user.lastName} id={'lastName'} onChange={handleChange} style={{margin: 10}}/>
+                <TextField label='Фамилия' value={user.lastName} id={'lastName'} onChange={handleChange}
+                           style={{margin: 10}}/>
             </Stack>
             <Stack flexWrap={'wrap'} spacing={2} justifyContent='center' direction={'row'}>
-                <TextField label='Отчество' value={user.patronymic} id={'patronymic'} onChange={handleChange} style={{margin: 10}}/>
+                <TextField label='Отчество' value={user.patronymic} id={'patronymic'} onChange={handleChange}
+                           style={{margin: 10}}/>
                 <LocalizationProvider dateAdapter={AdapterMoment} locale={'ru'}>
                     <DatePicker label='Дата'
                                 mask={'__.__.____'}
@@ -91,8 +93,10 @@ export default function ProfileComponent() {
                                 renderInput={(props) => <TextField {...props} style={{margin: 10}}/>}/>
                 </LocalizationProvider>
             </Stack>
-            <Stack sx={{mr: 2, flexDirection: {xs: 'column', md: 'row'}}} flexWrap={'wrap'} spacing={2} justifyContent='center'>
-                <Select value={user.gender?user.gender:'None'} id='gender' defaultValue={user.gender?user.gender:'None'} onChange={e => setUser({
+            <Stack sx={{mr: 2, flexDirection: {xs: 'column', md: 'row'}}} flexWrap={'wrap'} spacing={2}
+                   justifyContent='center'>
+                <Select value={user.gender ? user.gender : 'None'} id='gender'
+                        defaultValue={user.gender ? user.gender : 'None'} onChange={e => setUser({
                     ...user,
                     gender: e.target.value
                 })}>
@@ -102,7 +106,8 @@ export default function ProfileComponent() {
                 </Select>
             </Stack>
             <Divider>Контактная информация</Divider>
-            <Stack sx={{mr: 0, flexDirection: {xs: 'column', md: 'row'}}} flexWrap={'wrap'} spacing={2} justifyContent='center'>
+            <Stack sx={{mr: 0, flexDirection: {xs: 'column', md: 'row'}}} flexWrap={'wrap'} spacing={2}
+                   justifyContent='center'>
                 <TextField label='Номер телефона' value={user.tel} id={'tel'} onChange={handleChange} required
                            inputProps={{
                                inputMode: 'tel',

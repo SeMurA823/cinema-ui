@@ -37,7 +37,7 @@ export default function TicketItem(props: Props) {
     const screeningMoment = moment(new Date(props.ticket.filmScreening.date));
     return (
         <Stack>
-            <Stack padding={2} margin={1} bgcolor={canceled?'darkred':'dimgray'} borderRadius={2}>
+            <Stack padding={2} margin={1} bgcolor={canceled ? 'darkred' : 'dimgray'} borderRadius={2}>
                 <Typography variant='h4'>
                     <span style={{fontWeight: 'bolder'}}>Билет: </span>
                     <span>{props.ticket.id}</span>

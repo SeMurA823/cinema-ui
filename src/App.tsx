@@ -20,7 +20,7 @@ import {NotificationSubPage} from "./pages/NotificationSubPage";
 
 moment.locale('ru');
 
-export const ruMoment = (date: Date):moment.Moment => {
+export const ruMoment = (date: Date): moment.Moment => {
     return moment(date);
 }
 

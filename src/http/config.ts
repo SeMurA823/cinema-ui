@@ -2,8 +2,8 @@ import axios from "axios";
 import moment from "moment";
 import AuthService, {TOKEN_KEY} from "../services/AuthService";
 
-export const SERVER_URL = "http://cinemaapi.eastus.cloudapp.azure.com"
-// export const SERVER_URL = "http://localhost:8080"
+//export const SERVER_URL = "http://cinemaapi.eastus.cloudapp.azure.com"
+export const SERVER_URL = "http://localhost:8080"
 
 export const API_URL = `${SERVER_URL}/api`
 
@@ -23,7 +23,7 @@ type AccessTokenPayment = {
     sub: string,
     exp: number,
     iat: number
-}; 
+};
 
 export const isTokenExpired = () => {
     const token = localStorage.getItem(TOKEN_KEY);
@@ -53,8 +53,6 @@ $api.interceptors.request.use(async (config) => {
     }
     return config;
 })
-
-
 
 
 $api.interceptors.response.use((config) => {

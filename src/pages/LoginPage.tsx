@@ -18,10 +18,10 @@ function LoginPage() {
     const [error, setError] = useState<ErrorType | null>(null)
 
 
-    useEffect(()=>{
+    useEffect(() => {
         if (!store.isAuth)
             store.refresh();
-    },[])
+    }, [])
 
     const onLogin = async () => {
         setError(null);

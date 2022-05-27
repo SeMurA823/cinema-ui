@@ -6,7 +6,7 @@ import {SeatType} from "../models/response/HallTypes";
 
 type Props = {
     screeningId: number
-    onChange: (seats: Array<SeatType>)=>any
+    onChange: (seats: Array<SeatType>) => any
 }
 
 export default function ScreeningSeats(props: Props) {
@@ -62,7 +62,8 @@ export default function ScreeningSeats(props: Props) {
     return (
         <Stack style={{width: 'max-content'}}>
             <Stack alignItems={'center'}>
-                <Button color={'inherit'} variant={'outlined'} style={{width: '100%', height: 50, backgroundColor: 'rgba(255,255,255,0.09)'}}>
+                <Button color={'inherit'} variant={'outlined'}
+                        style={{width: '100%', height: 50, backgroundColor: 'rgba(255,255,255,0.09)'}}>
                     ЭКРАН
                 </Button>
                 <div style={{height: 50}}/>

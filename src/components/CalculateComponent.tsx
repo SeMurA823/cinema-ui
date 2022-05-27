@@ -4,19 +4,19 @@ import {Stack, Typography} from "@mui/material";
 
 type Props = {
     selected: ReservationType[];
-    onSubmit: ()=>any
+    onSubmit: () => any
 }
 
 export default function CalculateComponent(props: Props) {
 
     const [sum, setSum] = useState<number>(0);
 
-    useEffect(()=>{
+    useEffect(() => {
         let res = 0;
-        props.selected.forEach(x=>res += x.filmScreening.price);
+        props.selected.forEach(x => res += x.filmScreening.price);
         setSum(res);
 
-    },[props.selected])
+    }, [props.selected])
 
     return (
         <Stack>

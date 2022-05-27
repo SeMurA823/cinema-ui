@@ -57,23 +57,24 @@ export default function TodayFilmsBlock() {
 
                 <LocalizationProvider dateAdapter={AdapterMoment} locale={'ru'}>
                     <DesktopDatePicker mask={'__.__.____'}
-                                onChange={(newDate) => {
-                                    setDate(moment(newDate));
-                                }}
-                                minDate={moment()}
-                                value={date}
-                                renderInput={({ inputRef, inputProps, InputProps }) =>
-                                    <Stack>
-                                        <Typography textAlign={'center'} variant={'h3'} fontWeight={'bolder'}>
-                                            В кино
-                                        </Typography>
-                                        <Stack direction={'row'} alignItems={'center'}>
-                                            <Typography textAlign={'center'} variant={'h3'} fontWeight={'bolder'} ref={inputRef} >
-                                                {date.format('LL')}
-                                            </Typography>
-                                            {InputProps?.endAdornment}
-                                        </Stack>
-                                    </Stack>}/>
+                                       onChange={(newDate) => {
+                                           setDate(moment(newDate));
+                                       }}
+                                       minDate={moment()}
+                                       value={date}
+                                       renderInput={({inputRef, inputProps, InputProps}) =>
+                                           <Stack>
+                                               <Typography textAlign={'center'} variant={'h3'} fontWeight={'bolder'}>
+                                                   В кино
+                                               </Typography>
+                                               <Stack direction={'row'} alignItems={'center'}>
+                                                   <Typography textAlign={'center'} variant={'h3'} fontWeight={'bolder'}
+                                                               ref={inputRef}>
+                                                       {date.format('LL')}
+                                                   </Typography>
+                                                   {InputProps?.endAdornment}
+                                               </Stack>
+                                           </Stack>}/>
                 </LocalizationProvider>
             </Stack>
             <Stack direction={'row'} flexWrap={'wrap'} alignItems={'center'} justifyContent={'center'}>
@@ -88,7 +89,7 @@ export default function TodayFilmsBlock() {
             }
             {!responseFilms.last &&
                 <Stack alignItems='center'>
-                    <Button variant={'outlined'} onClick={()=>getTodayFilms(films, responseFilms)}>Ещё</Button>
+                    <Button variant={'outlined'} onClick={() => getTodayFilms(films, responseFilms)}>Ещё</Button>
                 </Stack>
             }
         </Stack>

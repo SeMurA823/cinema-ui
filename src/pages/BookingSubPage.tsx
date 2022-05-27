@@ -61,7 +61,9 @@ export default function BookingSubPage() {
         }
         if (mounted)
             setLoaded(true);
-        return () => {mounted = false};
+        return () => {
+            mounted = false
+        };
     }, [])
 
     return (

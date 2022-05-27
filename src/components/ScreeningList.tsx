@@ -27,7 +27,7 @@ export default function ScreeningList(props: Props) {
                                 renderInput={(props) => <TextField {...props}/>}/>
                 </LocalizationProvider>
             </Stack>
-            <ScreeningListItem filmId={props.film.id} date={(date)?date.toDate():new Date()}/>
+            <ScreeningListItem filmId={props.film.id} date={(date) ? date.toDate() : new Date()}/>
         </Stack>
     )
 }

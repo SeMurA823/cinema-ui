@@ -19,8 +19,8 @@ export default function PremiereFilmsBlock() {
         try {
             let response = await $api.get<IPage<FilmType>>(`/films/premieres?page=${responseFilms.number + 1}&size=${responseFilms.size}`);
             setResponseFilms(response.data);
-            const filmsId = films.map(x=>x.id);
-            setFilms([...films, ...(response.data.content.filter(x=>!filmsId.includes(x.id)))]);
+            const filmsId = films.map(x => x.id);
+            setFilms([...films, ...(response.data.content.filter(x => !filmsId.includes(x.id)))]);
         } catch (e) {
             console.log(e);
         } finally {
@@ -41,7 +41,7 @@ export default function PremiereFilmsBlock() {
         <Stack spacing={2} alignItems={'center'}>
             <Typography variant='h3' fontWeight='bolder'>Скоро</Typography>
             <Stack direction={'row'} flexWrap={'wrap'} alignItems={'center'} justifyContent={'center'}>
-                {films.map(film=>(
+                {films.map(film => (
                     <FilmCard film={film} key={film.id}/>
                 ))}
             </Stack>

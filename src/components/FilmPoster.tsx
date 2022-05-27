@@ -19,7 +19,7 @@ export default function FilmPoster(props: Props) {
     const posters = film.posters;
 
 
-    const items = (posters.length === 0) ? [(<PosterImage src={'/default-poster.gif'}/>)]: posters.map(poster => (
+    const items = (posters.length === 0) ? [(<PosterImage src={'/default-poster.gif'}/>)] : posters.map(poster => (
         <PosterImage poster={poster}/>
     ));
 
@@ -51,7 +51,8 @@ export default function FilmPoster(props: Props) {
                         style={{fontWeight: 'bolder'}}>Премьера в России: </span>{moment(new Date(film.localPremiere)).format('L')}
                 </Typography>
                 <Typography>
-                    <span style={{fontWeight: 'bolder'}}>Продолжительность: </span>{film.duration===0?'-':film.duration + ' мин'}
+                    <span
+                        style={{fontWeight: 'bolder'}}>Продолжительность: </span>{film.duration === 0 ? '-' : film.duration + ' мин'}
                 </Typography>
                 <Typography>
                     {film.plot}

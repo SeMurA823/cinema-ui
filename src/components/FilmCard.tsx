@@ -15,7 +15,7 @@ export default function FilmCard(props: Props) {
     const navigate = useNavigate();
     let film = props.film;
 
-    const date = props.date?props.date.startOf('date'):moment().startOf('date');
+    const date = props.date ? props.date.startOf('date') : moment().startOf('date');
 
     const [loaded, setLoaded] = useState<boolean>(false);
 

@@ -144,7 +144,7 @@ export default function ReservationList(props: ListProps) {
                     <CalculateComponent selected={selected} onSubmit={() => {
                     }}/>
                     <Stack direction={'row'} justifyContent={'center'}>
-                        <Button onClick={()=>buyTicket()}>Купить</Button>
+                        <Button onClick={() => buyTicket()}>Купить</Button>
                     </Stack>
                 </>
             }

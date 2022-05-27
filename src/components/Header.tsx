@@ -134,7 +134,7 @@ function Header(props: Props) {
                                 }}
                             >
                                 {pages.map((page) => (
-                                    <MenuItem key={page.value} onClick={()=>handleCloseNavMenu(page.link)}>
+                                    <MenuItem key={page.value} onClick={() => handleCloseNavMenu(page.link)}>
                                         <Link href={page.link} underline={'none'}>
                                             <Typography textAlign="center">{page.value}</Typography>
                                         </Link>
@@ -155,7 +155,7 @@ function Header(props: Props) {
                                 <Button
                                     key={page.value}
                                     href={page.link}
-                                    onClick={()=>handleCloseNavMenu(page.link)}
+                                    onClick={() => handleCloseNavMenu(page.link)}
                                     sx={{my: 2, color: 'white', display: 'block'}}
                                 >
                                     {page.value}
@@ -193,12 +193,14 @@ function Header(props: Props) {
                                     onClose={handleCloseUserMenu}
                                 >
                                     {settings.map((setting) => (
-                                        <MenuItem key={setting.value} onClick={()=>handleCloseNavMenu(setting.link)}>
-                                            <Link href={setting.link} underline={'none'} style={{display: 'block', width: '100%'}}>{setting.value}</Link>
+                                        <MenuItem key={setting.value} onClick={() => handleCloseNavMenu(setting.link)}>
+                                            <Link href={setting.link} underline={'none'}
+                                                  style={{display: 'block', width: '100%'}}>{setting.value}</Link>
                                         </MenuItem>
                                     ))}
-                                    <MenuItem onClick={()=>handleCloseNavMenu(LOGOUT_URL)}>
-                                        <Link href={LOGOUT_URL} underline={'none'} style={{display: 'block', width: '100%'}}>Выйти</Link>
+                                    <MenuItem onClick={() => handleCloseNavMenu(LOGOUT_URL)}>
+                                        <Link href={LOGOUT_URL} underline={'none'}
+                                              style={{display: 'block', width: '100%'}}>Выйти</Link>
                                     </MenuItem>
                                 </Menu>
                             </Stack>
